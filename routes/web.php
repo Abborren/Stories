@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'StoriesController@create');
+Route::post('/story', 'StoriesController@store');
+Route::get('/story/{uuid}', 'StoriesController@show');
 
