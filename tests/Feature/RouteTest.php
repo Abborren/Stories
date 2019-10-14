@@ -9,15 +9,17 @@ use Tests\TestCase;
 
 class RouteTest extends TestCase
 {
+    /** @test **/
     public function testForm()
     {
         $response = $this->get('/');
         $response->assertStatus(200);
     }
-    
+
+    /** @test **/
     public function testStore()
     {
-        $this->createStory(Str::random(10))
+        $this->createStory(Str::random(10), $this)
             ->assertStatus(201)
             ->assertJson([
                 'created' => true,
@@ -25,21 +27,19 @@ class RouteTest extends TestCase
             ]);
     }
     
+    // /** @test **/
     public function testGetStory()
     {
-        $response = $this->createStory(Str::random(10));
+        $response = $this->createStory(Str::random(10), $this);
         $url = $response->url;
         $response = $this->get($url);
         $response->assertStatus(200);
     }
 
-    private function createStory($story)
+    private function createStory($story, $context)
     {
-        return $this->withHeaders([
+        return $context->withHeaders([
             'X-Header' => 'Value',
         ])->json('POST', '/story', ['body' => $story]);
-
-
-       
     }
 }
