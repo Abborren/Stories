@@ -15,6 +15,8 @@ class CreateStoriesTable extends Migration
     {
         Schema::create('stories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('uuid', 32)->unique();
+            $table->string('body', 255);
             $table->timestamps();
         });
     }
