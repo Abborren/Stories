@@ -1,5 +1,9 @@
 @extends('story.layout')
 @section('title', 'Story')
 @section('content')
-    {{ $text ?? '' }}
+    <div class="box">
+        <p>
+            {{ $text ?? '' }}
+        </p>
+    </div>
 @endsection
