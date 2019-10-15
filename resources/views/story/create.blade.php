@@ -5,16 +5,16 @@
         @csrf
         <p>
             Som en 
-            <input type="text" name="role" id="role">
+        <input type="text" name="role" id="role" placeholder="{{$role ?? ''}}">
             vill jag 
-            <input type="text" name="activity" id="activity">
+            <input type="text" name="activity" id="activity" placeholder="{{$activity ?? ''}}">
             <select name="preposition" id="preposition">
                 <option value=" på ">på</option>
                 <option value=" i ">i</option>
             </select>
-            <input type="text" name="context" id="context">
+            <input type="text" name="context" id="context" placeholder="{{$context ?? ''}}">
             för att
-            <input type="text" name="reason" id="reason">
+            <input type="text" name="reason" id="reason" placeholder="{{$reason ?? ''}}">
         </p>
         <input type="submit" value="skicka" class="button">
     </form>

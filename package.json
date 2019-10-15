@@ -20,6 +20,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "clipboard": "^2.0.4",
         "node.normalize.scss": "^3.0.3"
     }
 }

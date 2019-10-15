@@ -1,5 +1,17 @@
 @extends('story.layout')
 @section('title', 'Success')
 @section('content')
-    {{ $url ?? '' }}
+<script src="/js/link.js"></script>
+    {{-- <script src="https://github.com/zenorocha/clipboard.js.git"></script> --}}
+    <div class="box">
+        <p class="clipboard">
+            <input id="foo" value="{{ $url ?? '' }}">
+            <button class="btn" data-clipboard-target="#foo">
+                <img src="/assets/clippy.svg" alt="Copy to clipboard">
+            </button>
+        </p>
+        <p>
+            Skicka denna länk till din lärare!
+        </p>
+    </div>
 @endsection

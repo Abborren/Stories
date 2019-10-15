@@ -15,7 +15,47 @@ class StoriesController extends Controller
      */
     public function create()
     {
-        return view('story.create');
+        $role = [
+            'elev',
+            'programmerare',
+            'austronaut',
+            'lärare',
+            'planta',
+        ];
+        $activity = [
+            'programmera',
+            'koda',
+            'dricka cola',
+            'spela'
+
+        ];
+
+        $context = [
+            'skolan',
+            'arbetsplatsen',
+            'källaren',
+            'zoo',
+            'hörnrummet',
+            'kontoret',
+            'simhallen',
+        ];
+        $reason = [
+            'jag kan',
+            'jag vill lära mig',
+            'utvecklas',
+            'ha kul',
+        ];
+        return view('story.create', [
+                'role' => $this->randomiser($role),
+                'activity' => $this->randomiser($activity),
+                'context' => $this->randomiser($context),
+                'reason' => $this->randomiser($reason),
+            ]);
+    }
+
+    public function randomiser($data)
+    {
+        return $data[rand(0,count($data)-1)]; 
     }
 
     /**
