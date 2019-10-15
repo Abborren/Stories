@@ -15,7 +15,7 @@ class StoriesController extends Controller
      */
     public function create()
     {
-        return view('index');
+        return view('story.create');
     }
 
     /**
@@ -26,10 +26,12 @@ class StoriesController extends Controller
      */
     public function store(StoriesRequest $request)
     {
-        // dd(Hashids::encode($id->));
-        dd($request);
-        // Validate the request
-        // Save request
+    
+        // dd($request->all());
+        $story = new Stories($request->all());
+        $story->save();
+        $id = Hashids::encode($story->id);
+        return view('story.link', ['url' => url("/story/{$id}")]);
         // Reutrn a view with the url of the redirect page.
     }
 
@@ -43,12 +45,12 @@ class StoriesController extends Controller
     { 
         $number = Hashids::decode($id_encrypted);
         
-        $story = Stories::findOrFail($number)[0];
+        $story = Stories::findOrFail($number)->first();
+        if($story == null) {
+            return redirect('/error');
+        }
+        dd($story);        // $story = $story[0];
         return $story->body; 
     }
 
-    public function index($id)
-    {
-               
-    }
 }
