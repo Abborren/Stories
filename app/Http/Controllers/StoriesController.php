@@ -49,8 +49,8 @@ class StoriesController extends Controller
         if($story == null) {
             return redirect('/error');
         }
-        dd($story);        // $story = $story[0];
-        return $story->body; 
+        
+        return view('story.show', ['text' => $story->body]);; 
     }
 
 }
