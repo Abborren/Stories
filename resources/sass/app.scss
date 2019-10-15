@@ -1,1 +1,74 @@
-//
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "../../node_modules/normalize-scss/sass/normalize";
+:root {
+
+    --primary-color: white; 
+}
+
+.container {
+    font-family: 'Roboto', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+body {
+    background-color: var(--primary-color);
+}
+.color-1 {
+    background-color: rgb(69, 163, 229);
+}
+
+.color-2 {
+background-color: rgb(140, 199, 63);
+}
+
+.color-3 {
+    background-color: rgb(243, 211, 51);
+}
+
+.color-4 {
+    background-color: rgb(243, 211, 51);
+}
+
+.box {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 25px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.16);
+}
+
+input {
+    font-size: 20px;
+    border-color: transparent;
+    border-bottom: 1px black solid;
+    &:focus {
+        outline-color: var(--primary-color);
+    }
+}
+
+
+select {
+    font-size: 20px;
+    border-color: transparent;
+    &:focus {
+        outline-color: var(--primary-color);
+    }
+}
+
+.button {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-bottom: none;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+}

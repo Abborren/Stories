@@ -1,7 +1,7 @@
 @extends('story.layout')
 @section('title', 'Error')
 @section('content')
-    <form action="/story" method="post">
+    <form action="/story" method="post" class="box" autocomplete="off">
         @csrf
         <p>
             Som en 
@@ -15,9 +15,8 @@
             <input type="text" name="context" id="context">
             för att
             <input type="text" name="reason" id="reason">
-            .
-            <input type="submit" value="submit">
         </p>
+        <input type="submit" value="skicka" class="button">
     </form>
 @endsection
     
