@@ -39,7 +39,7 @@ class StoriesRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function () {
-            $story = vsprintf('Som en %s vill jag %s %s för att %s.', array_values($this->except('_token')));
+            $story = vsprintf('Som en %s vill jag %s %s %s för att %s.', array_values($this->except('_token')));
             $this->request->add([
                 'body' => $story
                 ]);
