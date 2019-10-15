@@ -1,5 +1,5 @@
 @extends('story.layout')
-@section('title', 'Error')
+@section('title', 'skapa')
 @section('content')
     <form action="/story" method="post" class="box" autocomplete="off">
         @csrf

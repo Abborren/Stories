@@ -1,5 +1,5 @@
 @extends('story.layout')
-@section('title', 'Error')
+@section('title', 'error')
 @section('content')
     <div class="box">
         <p>

@@ -1,5 +1,5 @@
 @extends('story.layout')
-@section('title', 'Success')
+@section('title', 'lyckades')
 @section('content')
 <script src="/js/link.js"></script>
     {{-- <script src="https://github.com/zenorocha/clipboard.js.git"></script> --}}

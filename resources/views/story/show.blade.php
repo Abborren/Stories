@@ -1,5 +1,5 @@
 @extends('story.layout')
-@section('title', 'Story')
+@section('title', 'story')
 @section('content')
     <div class="box">
         <p>
