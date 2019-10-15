@@ -13,5 +13,5 @@
 
 Route::get('/', 'StoriesController@create');
 Route::post('/story', 'StoriesController@store');
-Route::get('/story/{uuid}', 'StoriesController@show');
+Route::get('/story/{id_encrypted}', 'StoriesController@show');
 

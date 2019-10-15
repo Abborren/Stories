@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use \App\stories;
-use Illuminate\Http\Request;
 
+use App\Http\Requests\StoriesRequest;
+use \App\Stories;
+use Illuminate\Http\Request;
+use Vinkla\Hashids\Facades\Hashids;
 class StoriesController extends Controller
 {
-
     /**
      * Show the form for creating a new resource.
      *
@@ -23,8 +24,9 @@ class StoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoriesRequest $request)
     {
+        // dd(Hashids::encode($id->));
         dd($request);
         // Validate the request
         // Save request
@@ -37,8 +39,16 @@ class StoriesController extends Controller
      * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function show(Stories $story)
+    public function show($id_encrypted)
+    { 
+        $number = Hashids::decode($id_encrypted);
+        
+        $story = Stories::findOrFail($number)[0];
+        return $story->body; 
+    }
+
+    public function index($id)
     {
-        dd($story);
+               
     }
 }
