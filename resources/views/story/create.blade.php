@@ -1,6 +1,7 @@
 @extends('story.layout')
 @section('title', 'skapa')
 @section('content')
+{{-- TODO: Add error validation for the fields. --}}
     <form action="/story" method="post" class="box" autocomplete="off">
         @csrf
         <p>

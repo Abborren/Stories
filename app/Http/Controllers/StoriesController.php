@@ -15,6 +15,10 @@ class StoriesController extends Controller
      */
     public function create()
     {
+
+        /**
+         * TODO: move these to a database so that they get automatically added on this->store
+         */
         $role = [
             'elev',
             'programmerare',
@@ -45,6 +49,7 @@ class StoriesController extends Controller
             'utvecklas',
             'ha kul',
         ];
+
         return view('story.create', [
                 'role' => $this->randomiser($role),
                 'activity' => $this->randomiser($activity),
@@ -66,7 +71,6 @@ class StoriesController extends Controller
      */
     public function store(StoriesRequest $request)
     {
-    
         // dd($request->all());
         $story = new Stories($request->all());
         $story->save();
