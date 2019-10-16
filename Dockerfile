@@ -1,54 +1,47 @@
-FROM php:7.2-fpm
+#
+# PHP Dependencies
+#
+FROM composer:1.7 as vendor
 
-COPY composer.lock composer.json /var/www/
-COPY package.json package-lock.json /var/www/
+COPY database/ database/
 
-# Set working directory
-WORKDIR /var/www
+COPY composer.json composer.json
+COPY composer.lock composer.lock
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    mysql-client \
-    libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
-    locales \
-    zip \
-    jpegoptim optipng pngquant gifsicle \
-    vim \
-    unzip \
-    git \
-    curl \
-    nodejs
+RUN composer install \
+    --ignore-platform-reqs \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --prefer-dist
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+#
+# Frontend
+#
+FROM node:8.11 as frontend
 
-# Install extensions
-RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
-RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
-RUN docker-php-ext-install gd
+RUN mkdir -p /app/public
 
-# Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY package.json webpack.mix.js yarn.lock /app/
+COPY resources/ /app/resources/
 
-# Add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+WORKDIR /app
 
-RUN npm i /var/www/
+RUN yarn install && yarn production
 
-# Copy existing application directory contents
-COPY . /var/www
+#
+# Application
+#
+FROM php:7.2-apache-stretch
 
-# Copy existing application directory permissions
-COPY --chown=www:www . /var/www
+RUN apt-get install php7.2-mysql
 
-RUN npm run prod
-# Change current user to www
-USER www
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# Expose port 9000 and start php-fpm server
-# EXPOSE 9000
-CMD ["php-fpm"]
+COPY . /var/www/html
+COPY --from=vendor /app/vendor/ /var/www/html/vendor/
+COPY --from=frontend /app/public/js/ /var/www/html/public/js/
+COPY --from=frontend /app/public/css/ /var/www/html/public/css/
+COPY --from=frontend /app/mix-manifest.json /var/www/html/mix-manifest.json
