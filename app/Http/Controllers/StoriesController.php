@@ -8,6 +8,7 @@ use \App\Role;
 use \App\Reason;
 use \App\Context;
 use \App\Activity;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
 class StoriesController extends Controller
@@ -44,12 +45,23 @@ class StoriesController extends Controller
      */
     public function store(StoriesRequest $request)
     {
-        // dd($request->all());
         $story = new Stories($request->all());
         $story->save();
+
+        $role = new Role(['text' => $request->role]);
+        $role->save();
+
+        $activity = new Activity(['text' => $request->activity]);
+        $activity->save();
+
+        $context = new Context(['text' => $request->context]);
+        $context->save();
+
+        $reason = new Reason(['text' => $request->reason]);
+        $reason->save();
+
         $id = Hashids::encode($story->id);
         return view('story.link', ['url' => url("/story/{$id}")]);
-        // Reutrn a view with the url of the redirect page.
     }
 
     /**
