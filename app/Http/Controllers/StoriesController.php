@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoriesRequest;
 use \App\Stories;
+use \App\Role;
+use \App\Reason;
+use \App\Context;
+use \App\Activity;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
 class StoriesController extends Controller
@@ -19,42 +23,11 @@ class StoriesController extends Controller
         /**
          * TODO: move these to a database so that they get automatically added on this->store
          */
-        $role = [
-            'elev',
-            'programmerare',
-            'austronaut',
-            'lärare',
-            'planta',
-        ];
-        $activity = [
-            'programmera',
-            'koda',
-            'dricka cola',
-            'spela'
-
-        ];
-
-        $context = [
-            'skolan',
-            'arbetsplatsen',
-            'källaren',
-            'zoo',
-            'hörnrummet',
-            'kontoret',
-            'simhallen',
-        ];
-        $reason = [
-            'jag kan',
-            'jag vill lära mig',
-            'utvecklas',
-            'ha kul',
-        ];
-
         return view('story.create', [
-                'role' => $this->randomiser($role),
-                'activity' => $this->randomiser($activity),
-                'context' => $this->randomiser($context),
-                'reason' => $this->randomiser($reason),
+                'role' => Role::all()->random()->text,
+                'activity' => Activity::all()->random()->text,
+                'context' => Context::all()->random()->text,
+                'reason' => Reason::all()->random()->text,
             ]);
     }
 
@@ -93,7 +66,6 @@ class StoriesController extends Controller
         if($story == null) {
             return redirect('/error');
         }
-        
         return view('story.show', ['text' => $story->body]);; 
     }
 
