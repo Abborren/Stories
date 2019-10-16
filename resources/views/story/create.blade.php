@@ -6,16 +6,42 @@
         @csrf
         <p>
             Som en 
-        <input type="text" name="role" id="role" placeholder="{{$role ?? ''}}">
-            vill jag 
-            <input type="text" name="activity" id="activity" placeholder="{{$activity ?? ''}}">
-            <select name="preposition" id="preposition">
-                <option value=" på ">på</option>
-                <option value=" i ">i</option>
-            </select>
-            <input type="text" name="context" id="context" placeholder="{{$context ?? ''}}">
-            för att
-            <input type="text" name="reason" id="reason" placeholder="{{$reason ?? ''}}">
+        <input type="text" name="role" id="role" 
+            placeholder="{{$role ?? ''}}" 
+            value="{{ old('role') ?? '' }}"
+            @error('role')
+                class="error"
+            @enderror    
+        >
+        vill jag
+     
+        <input type="text" name="activity" id="activity" 
+            placeholder="{{$activity ?? ''}}" 
+            value="{{ old('activity') ?? '' }}"
+            @error('activity')
+                class="error"
+            @enderror 
+        >
+        <select name="preposition" id="preposition">
+            <option value=" på ">på</option>
+            <option value=" i ">i</option>
+        </select>
+        <input type="text" name="context" id="context" 
+            placeholder="{{$context ?? ''}}"
+            value="{{ old('context') ?? '' }}"
+            @error('context')
+                class="error"
+            @enderror
+            
+        >
+        för att
+        <input type="text" name="reason" id="reason" 
+            placeholder="{{$reason ?? ''}}"
+            value="{{ old('reason') ?? '' }}"
+            @error('reason')
+                class="error"
+            @enderror
+        >
         </p>
         <input type="submit" value="skicka" class="button">
     </form>

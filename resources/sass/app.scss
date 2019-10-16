@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import "../../node_modules/node.normalize.scss/normalize";
+$radius: 5px;
+
 :root {
     --primary-color: white; 
 }
@@ -19,7 +21,7 @@ body {
 }
 
 .color-2 {
-background-color: rgb(140, 199, 63);
+    background-color: rgb(140, 199, 63);
 }
 
 .color-3 {
@@ -34,11 +36,11 @@ background-color: rgb(140, 199, 63);
     font-size: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    // align-items: center;
     background-color: #ffffff;
     padding: 25px;
     margin: 20px;
-    border-radius: 5px;
+    border-radius: $radius;
     box-shadow: 5px 5px 10px rgba(0,0,0,0.16);
 }
 
@@ -46,8 +48,20 @@ input {
     font-size: 20px;
     border-color: transparent;
     border-bottom: 2px var(--primary-color) solid;
-    &:focus {
-        outline-color: var(--primary-color);
+    outline-color: var(--primary-color);
+    position: relative;
+}
+
+@media (max-width: 767px) {
+    input {
+        display: block;
+        margin: 3px 0;
+    }
+}
+
+.error {
+    &:placeholder-shown {
+        border-bottom: 2px red solid;
     }
 }
 
@@ -62,11 +76,12 @@ select {
 .button {
     background-color: var(--primary-color);
     color: #ffffff;
+    align-self: center;
     border-bottom: none;
     margin-top: 20px;
     padding: 10px;
     font-size: 20px;
-    border-radius: 5px;
+    border-radius: $radius;
     text-transform: uppercase;
     cursor: pointer;
 }
