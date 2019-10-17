@@ -8,6 +8,8 @@ COPY database/ database/
 COPY composer.json composer.json
 COPY composer.lock composer.lock
 
+RUN composer global require hirak/prestissimo
+
 RUN composer install \
     --ignore-platform-reqs \
     --no-interaction \
@@ -34,7 +36,10 @@ RUN yarn install && yarn production
 #
 FROM php:7.2-apache-stretch
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+COPY apache/apache.conf /etc/apache2/sites-available/000-default.conf
+
+RUN a2enmod rewrite
+RUN docker-php-ext-install pdo pdo_mysql mysqli bcmath
 
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf

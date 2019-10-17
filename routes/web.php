@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', 'StoriesController@create');
-Route::post('/story', 'StoriesController@store');
-Route::get('/story/{id_encrypted}', 'StoriesController@show');
+Route::get('/', 'StoriesController@create')->name('story.index');
+Route::post('/story', 'StoriesController@store')->name('story.store');
+Route::get('/story/{id_encrypted}', 'StoriesController@show')->name('story.show');
 
 Route::get('/error', function() {
     return view('story.error');

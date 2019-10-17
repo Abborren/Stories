@@ -61,7 +61,7 @@ class StoriesController extends Controller
         $reason->save();
 
         $id = Hashids::encode($story->id);
-        return view('story.link', ['url' => url("/story/{$id}")]);
+        return view('story.link', ['url' => secure_url("/story/{$id}")]);
     }
 
     /**
