@@ -26,6 +26,9 @@ class CreateContextsTable extends Migration
             'hörnrummet',
             'kontoret',
             'simhallen',
+            'quake',
+            'julafton',
+            'stranden'
         ];
 
         foreach($text as $val) {

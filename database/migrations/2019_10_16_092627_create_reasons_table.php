@@ -23,6 +23,8 @@ class CreateReasonsTable extends Migration
             'jag vill lära mig',
             'utvecklas',
             'ha kul',
+            'det är nice',
+            'tjäna guldstjärnor'
         ];
 
         foreach($text as $val) {

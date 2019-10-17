@@ -22,8 +22,9 @@ class CreateActivitiesTable extends Migration
             'programmera',
             'koda',
             'dricka cola',
-            'spela'
-
+            'spela',
+            'vinna',
+            'sola'
         ];
 
         foreach($text as $val) {

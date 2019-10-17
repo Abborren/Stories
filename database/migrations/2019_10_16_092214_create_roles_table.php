@@ -24,6 +24,9 @@ class CreateRolesTable extends Migration
             'austronaut',
             'lärare',
             'planta',
+            'banan',
+            'potatis',
+            'smörbulle'
         ];
 
         foreach($text as $val) {
