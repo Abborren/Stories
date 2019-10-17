@@ -25,11 +25,11 @@ class StoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'role' => 'required',
-            'activity' => 'required',
+            'role' => 'required|max:255',
+            'activity' => 'required|max:255',
             'preposition' => 'required',
-            'context' => 'required',
-            'reason' => 'required',
+            'context' => 'required|max:255',
+            'reason' => 'required|max:255',
         ];
     }
 

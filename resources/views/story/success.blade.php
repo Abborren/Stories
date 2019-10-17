@@ -13,5 +13,6 @@
         <p>
             Skicka denna länk till din lärare!
         </p>
+        <a href="/" class="button">tillbaka</a>
     </div>
 @endsection

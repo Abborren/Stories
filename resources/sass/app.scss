@@ -84,6 +84,9 @@ select {
     border-radius: $radius;
     text-transform: uppercase;
     cursor: pointer;
+    &:hover {
+        color: white !important;
+    }
 }
 .clipboard {
     .btn {

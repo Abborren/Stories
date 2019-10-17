@@ -13,6 +13,7 @@
 
 Route::get('/', 'StoriesController@create')->name('story.index');
 Route::post('/story', 'StoriesController@store')->name('story.store');
+Route::get('/success/{uuid}', 'StoriesController@success')->name('story.success');
 Route::get('/story/{id_encrypted}', 'StoriesController@show')->name('story.show');
 
 Route::get('/error', function() {

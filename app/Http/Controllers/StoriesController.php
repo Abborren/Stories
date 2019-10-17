@@ -37,6 +37,11 @@ class StoriesController extends Controller
         return $data[rand(0,count($data)-1)]; 
     }
 
+    public function success($uuid)
+    {
+        return view('story.success', ['url' => secure_url("/story/{$uuid}")]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -45,23 +50,26 @@ class StoriesController extends Controller
      */
     public function store(StoriesRequest $request)
     {
+        $fun_mode = env("FUN_MODE", false);
+        if ($fun_mode) {
+            $role = new Role(['text' => $request->role]);
+            $role->save();
+    
+            $activity = new Activity(['text' => $request->activity]);
+            $activity->save();
+    
+            $context = new Context(['text' => $request->context]);
+            $context->save();
+    
+            $reason = new Reason(['text' => $request->reason]);
+            $reason->save();
+        }
         $story = new Stories($request->all());
         $story->save();
 
-        $role = new Role(['text' => $request->role]);
-        $role->save();
-
-        $activity = new Activity(['text' => $request->activity]);
-        $activity->save();
-
-        $context = new Context(['text' => $request->context]);
-        $context->save();
-
-        $reason = new Reason(['text' => $request->reason]);
-        $reason->save();
-
         $id = Hashids::encode($story->id);
-        return view('story.link', ['url' => secure_url("/story/{$id}")]);
+        return redirect()->route('story.success', ['uuid' => $id]);
+        
     }
 
     /**
